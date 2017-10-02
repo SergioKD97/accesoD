@@ -50,8 +50,9 @@ public class Fichero_secuencial {
         System.out.println("Archivo no encontrado!!!" + fnfex); 
         }
         catch(java.io.IOException ioex){} 
-            
         }
+    
+    
     
     
     
