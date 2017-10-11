@@ -6,10 +6,8 @@
 package fichero_secuencial;
 
 import static fichero_secuencial.Fichero_secuencial1.grabarDatos;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import javax.swing.JFrame;
 
 
 /**
@@ -35,43 +33,23 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         TextoLeido = new javax.swing.JDialog();
-        Volver = new javax.swing.JButton();
-        Texto = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         Escribir = new javax.swing.JButton();
         Leer = new javax.swing.JButton();
-
-        Volver.setText("Volver");
-
-        javax.swing.GroupLayout TextoLeidoLayout = new javax.swing.GroupLayout(TextoLeido.getContentPane());
-        TextoLeido.getContentPane().setLayout(TextoLeidoLayout);
-        TextoLeidoLayout.setHorizontalGroup(
-            TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TextoLeidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TextoLeidoLayout.createSequentialGroup()
-                        .addGap(0, 317, Short.MAX_VALUE)
-                        .addComponent(Volver))
-                    .addComponent(Texto))
-                .addContainerGap())
-        );
-        TextoLeidoLayout.setVerticalGroup(
-            TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TextoLeidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Volver)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Texto, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        Panel1 = new javax.swing.JPanel();
+        CopiarFichero = new javax.swing.JButton();
+        CrearFichero = new javax.swing.JButton();
+        ArchivoAleatorio = new javax.swing.JButton();
+        ArchivoSecuencial = new javax.swing.JButton();
 
         Escribir.setText("Escribir");
         Escribir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 EscribirMousePressed(evt);
+            }
+        });
+        Escribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EscribirActionPerformed(evt);
             }
         });
 
@@ -87,25 +65,73 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout TextoLeidoLayout = new javax.swing.GroupLayout(TextoLeido.getContentPane());
+        TextoLeido.getContentPane().setLayout(TextoLeidoLayout);
+        TextoLeidoLayout.setHorizontalGroup(
+            TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(TextoLeidoLayout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(Leer, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                    .addComponent(Escribir, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addGap(20, 20, 20)))
+        );
+        TextoLeidoLayout.setVerticalGroup(
+            TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(TextoLeidoLayout.createSequentialGroup()
+                    .addGap(97, 97, 97)
+                    .addGroup(TextoLeidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Leer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Escribir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(97, Short.MAX_VALUE)))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        CopiarFichero.setText("Copiar fichero");
+
+        CrearFichero.setText("Crear fichero o carpeta");
+
+        ArchivoAleatorio.setText("Archivo aleatorio");
+
+        ArchivoSecuencial.setText("Archivo secuencial");
+        ArchivoSecuencial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ArchivoSecuencialMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel1Layout = new javax.swing.GroupLayout(Panel1);
+        Panel1.setLayout(Panel1Layout);
+        Panel1Layout.setHorizontalGroup(
+            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Leer, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CrearFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ArchivoSecuencial, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(Escribir, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ArchivoAleatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(CopiarFichero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Escribir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Leer, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(103, Short.MAX_VALUE))
+        Panel1Layout.setVerticalGroup(
+            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ArchivoSecuencial, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                    .addComponent(ArchivoAleatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CrearFichero, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(CopiarFichero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,14 +140,14 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -135,11 +161,21 @@ public class Menu extends javax.swing.JFrame {
     private void EscribirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EscribirMousePressed
         grabarDatos("C:\\Users\\Sergio\\Desktop\\UFV\\Acceso a Datos\\fichero1.txt","asdfadsfvsdcasd,asdofijasdof");
     }//GEN-LAST:event_EscribirMousePressed
-
+    
     private void LeerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LeerMousePressed
         leerDatos("C:\\Users\\Sergio\\Desktop\\UFV\\Acceso a Datos\\fichero1.txt");
     }//GEN-LAST:event_LeerMousePressed
 
+    private void EscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EscribirActionPerformed
+
+    private void ArchivoSecuencialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArchivoSecuencialMousePressed
+        TextoLeido.setVisible(true);
+        
+        TextoLeido.setSize(400, 300);
+    }//GEN-LAST:event_ArchivoSecuencialMousePressed
+    
     
     
     public static void grabarDatos(String archivo, String datos){
@@ -220,11 +256,13 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ArchivoAleatorio;
+    private javax.swing.JButton ArchivoSecuencial;
+    private javax.swing.JButton CopiarFichero;
+    private javax.swing.JButton CrearFichero;
     private javax.swing.JButton Escribir;
     private javax.swing.JButton Leer;
-    private javax.swing.JTextField Texto;
+    private javax.swing.JPanel Panel1;
     private javax.swing.JDialog TextoLeido;
-    private javax.swing.JButton Volver;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
