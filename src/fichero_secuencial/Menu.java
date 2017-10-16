@@ -6,9 +6,14 @@
 package fichero_secuencial;
 
 import static fichero_secuencial.Fichero_secuencial1.grabarDatos;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.*;
+import java.time.Clock;
 import javax.swing.JFrame;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 
 
 /**
@@ -65,6 +70,12 @@ public class Menu extends javax.swing.JFrame {
         NombreFichero = new javax.swing.JLabel();
         rutaFichero = new javax.swing.JTextField();
         AceptarFichero = new javax.swing.JButton();
+        BuscarTexto2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        TextoBuscar = new javax.swing.JTextField();
+        BotonBuscar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TextoBuscado = new javax.swing.JTextArea();
         Panel1 = new javax.swing.JPanel();
         CopiarFichero = new javax.swing.JButton();
         CrearFichero = new javax.swing.JButton();
@@ -388,6 +399,11 @@ public class Menu extends javax.swing.JFrame {
         rutaFichero.setText("fichero.txt");
 
         AceptarFichero.setText("Aceptar");
+        AceptarFichero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                AceptarFicheroMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout RutaArchivoLayout = new javax.swing.GroupLayout(RutaArchivo);
         RutaArchivo.setLayout(RutaArchivoLayout);
@@ -398,7 +414,7 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rutaFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(AceptarFichero, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(AceptarFichero, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                 .addContainerGap())
         );
         RutaArchivoLayout.setVerticalGroup(
@@ -412,6 +428,53 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel1.setText("Texto a Buscar:");
+
+        BotonBuscar.setText("Buscar");
+        BotonBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonBuscarMousePressed(evt);
+            }
+        });
+
+        TextoBuscado.setColumns(20);
+        TextoBuscado.setRows(5);
+        jScrollPane3.setViewportView(TextoBuscado);
+
+        javax.swing.GroupLayout BuscarTexto2Layout = new javax.swing.GroupLayout(BuscarTexto2);
+        BuscarTexto2.setLayout(BuscarTexto2Layout);
+        BuscarTexto2Layout.setHorizontalGroup(
+            BuscarTexto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscarTexto2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TextoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(BuscarTexto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(BuscarTexto2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        BuscarTexto2Layout.setVerticalGroup(
+            BuscarTexto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscarTexto2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BuscarTexto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TextoBuscar, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BotonBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
+            .addGroup(BuscarTexto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscarTexto2Layout.createSequentialGroup()
+                    .addContainerGap(51, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
         javax.swing.GroupLayout BuscarTexto1Layout = new javax.swing.GroupLayout(BuscarTexto1.getContentPane());
         BuscarTexto1.getContentPane().setLayout(BuscarTexto1Layout);
         BuscarTexto1Layout.setHorizontalGroup(
@@ -420,6 +483,11 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(RutaArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(BuscarTexto1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(BuscarTexto1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(BuscarTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         BuscarTexto1Layout.setVerticalGroup(
             BuscarTexto1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,6 +495,11 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(RutaArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(BuscarTexto1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(BuscarTexto1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(BuscarTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -557,13 +630,92 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SobreEscribirMousePressed
 
     private void BuscarTextoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarTextoMousePressed
-        ArchivoSecuencial1.setVisible(false);
         LeerEscribir.setVisible(false);
+        BuscarTexto2.setVisible(false);
         BuscarTexto1.setVisible(true);
         BuscarTexto1.setSize(488, 93);
         BuscarTexto1.setLocation(300, 300);
+        RutaArchivo.setVisible(true);
     }//GEN-LAST:event_BuscarTextoMousePressed
+
+    private void AceptarFicheroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AceptarFicheroMousePressed
+        RutaArchivo.setVisible(false);
+        BuscarTexto2.setVisible(true);
+        BuscarTexto1.setSize(500, 348);
+        leerDatos1(rutaFichero.getText());
+        
+    }//GEN-LAST:event_AceptarFicheroMousePressed
+
+    private void BotonBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonBuscarMousePressed
+        BuscarTexto(TextoBuscar.getText());
+        
+        
+    }//GEN-LAST:event_BotonBuscarMousePressed
     
+    
+    
+    
+    public void BuscarTexto(String PalabraABuscar){
+        String TextoBuscar = TextoBuscado.getText();
+        int p = 0;
+        int wil = 0;
+        
+        Highlighter luz = TextoBuscado.getHighlighter();
+        //PARA CAMBIAR EL COLOR DEL RESALTADOR
+        Highlighter.HighlightPainter amarillo = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+        luz.removeAllHighlights();
+
+        for(int i=0;i<TextoBuscar.length();i++){
+            if(PalabraABuscar.charAt(0) == TextoBuscar.charAt(i)){
+                    for(int j=0;j<PalabraABuscar.length();j++){
+                        
+                        if(PalabraABuscar.charAt(j) == TextoBuscar.charAt(i+p)){
+                            wil += 1;
+                        }
+                        p += 1;
+                    }
+                    
+                    
+                    for(int l=0;l<wil;l++){
+                        if(PalabraABuscar.length() == wil){    
+
+                            try{
+                                luz.addHighlight(i+l, i+l+1, amarillo);
+                            } catch (BadLocationException ex) {System.out.print("No se ha podido colorear");}
+                        
+                        }
+                    }
+            }
+            p=0;
+        }
+        
+    }
+    
+    public void leerDatos1(String archivo){
+        
+        
+        try{
+            String texto= new String();
+            FileReader fr = new FileReader(archivo);
+            BufferedReader entrada = new BufferedReader(fr);
+            String s;
+            
+            
+            while((s = entrada.readLine() )!=null)
+                texto += s ;
+            
+            TextoBuscado.setText(texto);
+          
+            System.out.print((char) entrada.read());
+            entrada.close();
+            
+        }
+        
+        catch(java.io.FileNotFoundException fnfex){   
+        System.out.println("Archivo no encontrado!!!"); 
+        }
+        catch(java.io.IOException ioex){} 
+        }
     
     public void grabarDatos1(String archivo, String datos){
         try{
@@ -686,8 +838,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel ArchivoSobreescribir;
     private javax.swing.JScrollPane AreaLeer;
     private javax.swing.JTextArea AreaLeer1;
+    private javax.swing.JButton BotonBuscar;
     private javax.swing.JButton BuscarTexto;
     private javax.swing.JDialog BuscarTexto1;
+    private javax.swing.JPanel BuscarTexto2;
     private javax.swing.JButton CopiarFichero;
     private javax.swing.JButton CrearFichero;
     private javax.swing.JButton EscribirFichero;
@@ -702,12 +856,16 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel RutaArchivo;
     private javax.swing.JButton SobreEscribir;
     private javax.swing.JButton Sobreescribir;
+    private javax.swing.JTextArea TextoBuscado;
+    private javax.swing.JTextField TextoBuscar;
     private javax.swing.JLabel TextoEscribir;
     private javax.swing.JTextArea TextoEscribir1;
     private javax.swing.JLabel TextoLeer;
     private javax.swing.JTextArea TextoSobreescribir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField rutaFichero;
     // End of variables declaration//GEN-END:variables
 }
